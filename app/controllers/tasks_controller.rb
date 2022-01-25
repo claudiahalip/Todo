@@ -3,7 +3,7 @@ class TasksController < ApplicationController
     def create
         task = Task.new(task_params)
         if task.save
-            render json: "The task was created"
+            render json: task
         else
             render json: {error: "The task couldn't be added. Try again!"}
         end
@@ -12,7 +12,7 @@ class TasksController < ApplicationController
     private
 
     def task_params
-        params.require(:task).request(:description)
+        params.require(:task).permit(:description, :is_completed)
     end
 
 end
