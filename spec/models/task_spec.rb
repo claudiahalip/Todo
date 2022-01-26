@@ -2,11 +2,8 @@ require 'rails_helper'
 
 RSpec.describe Task, type: :model do
 
-    before(:all) do
-        @task = Task.create(description: "walk the dog")
-    end
-
     it "checks if a task can be created" do
+        @task = Task.create(description: "walk the dog")
         expect(@task).to be_valid
     end
 
