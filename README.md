@@ -1,24 +1,24 @@
-# README
+# Todo app
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+ A Todo application built with Rails framework.
+## Installation
 
-Things you may want to cover:
+ Ruby version:  "3.1.0"
 
-* Ruby version
+ Rails version: 7.0.1"
 
-* System dependencies
+ Install gems: `bundle install`
 
-* Configuration
+ Create database : `bin/rails db:create`
+ ## Start 
 
-* Database creation
+ Run the application: `bin/rails s`
 
-* Database initialization
+ Start the console: `bin/rails c`
 
-* How to run the test suite
+ Start database: `bin/rails db`
 
-* Services (job queues, cache servers, search engines, etc.)
+ ## Tests
 
-* Deployment instructions
+ Run the test suite : `rspec spec`
 
-* ...
