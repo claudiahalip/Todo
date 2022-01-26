@@ -14,4 +14,11 @@ RSpec.describe TasksController, type: :controller do
             expect(JSON.parse(response.body)).to eq("error" => "The task couldn't be added. Try again!")
         end
     end 
+
+    describe "GET#index" do
+        it" returns http success " do
+            get :index
+            expect(response).to have_http_status(:success)
+        end
+    end 
 end
