@@ -1,7 +1,7 @@
 # Todo app
 
  A Todo application built with Rails framework.
-## Instalation
+## Installation
 
  Ruby version:  "3.1.0"
 
@@ -9,14 +9,14 @@
 
  Install gems: `bundle install`
 
- Create database : `bun/rails db:create`
+ Create database : `bin/rails db:create`
  ## Start 
 
- Run the application: `rails s`
+ Run the application: `bin/rails s`
 
- Start the console: `rails c`
+ Start the console: `bin/rails c`
 
- Start database: `rails db`
+ Start database: `bin/rails db`
 
  ## Tests
 
