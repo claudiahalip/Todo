@@ -16,19 +16,17 @@ RSpec.describe TasksController, type: :controller do
     end 
 
     describe "GET#index" do
+
         it "returns http success" do
             get :index
             expect(response).to have_http_status(:success)
         end
 
-        it "returns body with description attribute" do
+        it "retuns body with 2 tasks" do
+            Task.create(description: "walk the dog")
+            Task.create(description: "feed the dog")
             get :index
-            expect(JSON.parse(response.body)[0].keys).to include("description")
-        end
-
-        it "returns body with is_completed attribute" do
-            get :index
-            expect(JSON.parse(response.body)[0].keys).to include("is_completed")
+            expect(JSON.parse(response.body).size).to eq(2)
         end
     end 
 end

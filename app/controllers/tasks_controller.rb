@@ -10,8 +10,7 @@ class TasksController < ApplicationController
     end
 
     def index
-        tasks = Task.all 
-        render json: tasks
+        render json: Task.all
     end
 
     private
