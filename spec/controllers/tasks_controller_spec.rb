@@ -20,5 +20,15 @@ RSpec.describe TasksController, type: :controller do
             get :index
             expect(response).to have_http_status(:success)
         end
+
+        it" returns body with description attribute" do
+            get :index
+            expect(JSON.parse(response.body)[0].keys).to include("description")
+        end
+
+        it" returns body with is_completed attribute" do
+            get :index
+            expect(JSON.parse(response.body)[0].keys).to include("is_completed")
+        end
     end 
 end
