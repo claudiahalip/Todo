@@ -7,7 +7,7 @@ RSpec.describe Task, type: :model do
         expect(@task).to be_valid
     end
 
-    it " will not be created if not valid" do
+    it "will not be created if not valid" do
         task = Task.create()
         expect(task).to_not be_valid
     end
