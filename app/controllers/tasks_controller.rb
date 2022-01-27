@@ -5,20 +5,20 @@ class TasksController < ApplicationController
     def create
         task = Task.new(task_params)
         if task.save
-            render json: task
+            render_response(task)
         else
-            render json: {error: "The task couldn't be added. Try again!"}
+            render_response("The task couldn't be added. Try again!")
         end
     end
 
     def index
-        render json: Task.all
+        render_response(Task.all)
     end
 
     def destroy
         task = Task.find(params[:id])
         task.destroy
-        render json: "The task was successfully deleted."
+        render_response("The task was successfully deleted.")
     end
 
     private
