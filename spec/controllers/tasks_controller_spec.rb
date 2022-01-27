@@ -28,5 +28,28 @@ RSpec.describe TasksController, type: :controller do
             get :index
             expect(JSON.parse(response.body).size).to eq(2)
         end
-    end 
+    end
+    
+    describe "DELETE#destroy" do
+
+        it "returns http success" do
+            task = Task.create(description: "walk the dog")
+            delete :destroy, params: {id: task.id}
+            expect(response).to have_http_status(:success)
+        end
+
+        it "returns a message that the task was deleted" do
+            task1 = Task.create(description: "walk the dog")
+            delete :destroy, params: {id: task1.id}
+            expect(response.body).to eq("The task was successfully deleted.")
+        end
+
+        it "will delete a task" do
+            task1 = Task.create(description: "walk the dog")
+            expect{
+                delete :destroy, params: {id: task1.id}
+            }.to change(Task, :count).by(-1)
+        end
+    end
 end
+
