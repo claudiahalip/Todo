@@ -9,6 +9,10 @@ class TasksController < ApplicationController
         end
     end
 
+    def index
+        render json: Task.all
+    end
+
     private
 
     def task_params
