@@ -64,5 +64,27 @@ RSpec.describe TasksController, type: :controller do
             }.to change(Task, :count).by(-1)
         end
     end
+
+    describe "PATCH#update" do
+        it "returns http success" do
+            task = Task.create(description: "walk the dog")
+            patch :update, params: {id: task.id}
+
+            expect(response).to have_http_status(:success)
+        end
+
+        it "returns a message that the task succesfuly updated" do
+            task = Task.create(description: "walk the dog")
+            patch :update, params: {id: task.id}
+
+            expect(response.body).to eq("The task was successfully updated.")
+        end
+
+        it "returns a message that the task wasn't found if task doesn't exist" do
+            patch :update, params: {id: 1}
+
+            expect(JSON.parse(response.body)).to eq("error" => "Couldn't find Task with 'id'=1")
+        end
+    end
 end
 
