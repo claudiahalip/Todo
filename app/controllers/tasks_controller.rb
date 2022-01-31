@@ -15,6 +15,12 @@ class TasksController < ApplicationController
         render_response(Task.all)
     end
 
+    def update
+        task = Task.find(params[:id])
+        task.update(is_completed: params[:is_completed])
+        render json: "The task was successfully updated."
+    end
+
     def destroy
         task = Task.find(params[:id])
         task.destroy
