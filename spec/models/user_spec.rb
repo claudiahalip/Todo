@@ -3,12 +3,12 @@ require 'rails_helper'
 RSpec.describe User, type: :model do
 
     it "checks if a task can be created" do
-        user = User.create(first_name: "TestFirstName", 
-            last_name: "TestLastName", 
-            email:"TestEmail",
-            username: "TestUsername",
-            password: "TestPassword",
-            password_confirmation: "TestPassword")
+        user = User.create(first_name: "FirstName", 
+            last_name: "LastName", 
+            email:"Email",
+            username: "Username",
+            password: "Password",
+            password_confirmation: "Password")
 
         expect(user).to be_valid
     end
@@ -62,5 +62,4 @@ RSpec.describe User, type: :model do
 
         expect(user.username).to eq("TestUsername")
     end
-
 end

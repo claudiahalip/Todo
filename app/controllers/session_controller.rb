@@ -6,7 +6,15 @@ class SessionController < ApplicationController
             login
             render json: "You are logged in."
         else
-            render json: "No such user, verify credentaials and try again or signup."
+            render json: "No such user, verify credentials and try again or signup."
+        end
+    end
+
+    def is_logged_in?
+        if logged_in? && current_user
+            render json: {logged_in: true, user: current_user}
+        else
+            render json: {logged_in: false, message: "no such user"}
         end
     end
 

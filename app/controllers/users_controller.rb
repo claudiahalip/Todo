@@ -5,11 +5,12 @@ class UsersController < ApplicationController
     end
 
     def create
-        user = User.new(user_params)
-        if user.save
+        @user = User.new(user_params)
+        if @user.save
+            login
             render_response("A new account was successfully created!")
         else
-            render_response(user.errors.full_messages)
+            render_response(@user.errors.full_messages)
         end
     end
 
