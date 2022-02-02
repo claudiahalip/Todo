@@ -1,5 +1,6 @@
 class TasksController < ApplicationController
 
+    include TasksHelper
     rescue_from ::ActiveRecord::RecordNotFound, with: :record_not_found
 
     def create
@@ -25,9 +26,9 @@ class TasksController < ApplicationController
 
     def update
         task = Task.find(params[:id])
-        if current_user && task.user_id == current_user.id
+        if task_belons_to_user?(task.user_id)
             task.update(is_completed: params[:is_completed])
-            render json: "The task was successfully updated."
+            render_response("The task was successfully updated.")
         else
             render_response("You are not authorized to update this task.")
         end
@@ -35,7 +36,7 @@ class TasksController < ApplicationController
 
     def destroy
         task = Task.find(params[:id])
-        if current_user && task.user_id == current_user.id
+        if task_belons_to_user?(task.user_id)
             task.destroy
             render_response("The task was successfully deleted.")
         else

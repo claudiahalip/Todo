@@ -3,22 +3,22 @@ require 'json'
 
 RSpec.describe UsersController, type: :controller do
 
-    validUserTestParams = { user: {first_name: "UserFirstName", 
+    valid_user_test_params = { user: {first_name: "UserFirstName", 
             last_name: "UserLastName", 
-            email:"UserEmail",
+            email: "UserEmail",
             username: "UserUsername",
             password: "UserPassword",
             password_confirmation: "UserPassword"}}
 
     describe "POST#create" do
         it "returns http success" do
-            post :create, params: validUserTestParams
+            post :create, params: valid_user_test_params
 
             expect(response).to have_http_status(:success)
         end
 
         it "returns a successfull message if the user is valid" do
-            post :create, params: validUserTestParams
+            post :create, params: valid_user_test_params
 
             expect(response.body).to eq("A new account was successfully created!")
         end
@@ -43,12 +43,12 @@ RSpec.describe UsersController, type: :controller do
                     email: "TestEmail",
                     username: "TestUsername",
                     password: nil,
-                    password_confirmation:nil}}
+                    password_confirmation: nil}}
             expect(JSON.parse(response.body)[0]).to eq("Password can't be blank")
         end
 
         it "returns an error message if the email is not unique" do
-            post :create, params: validUserTestParams
+            post :create, params: valid_user_test_params
             post :create, params: { 
                 user: {
                     first_name: "FirstName", 
@@ -61,7 +61,7 @@ RSpec.describe UsersController, type: :controller do
         end
 
         it "returns an error message if the username is not unique" do
-            post :create, params: validUserTestParams
+            post :create, params: valid_user_test_params
             post :create, params: { 
                 user: {
                     first_name: "FirstName", 
@@ -85,7 +85,7 @@ RSpec.describe UsersController, type: :controller do
         it "retuns body with 1 user" do
             user = User.create(first_name: "TestFirstName", 
             last_name: "TestLastName", 
-            email:"TestEmail",
+            email: "TestEmail",
             username: "TestUsername",
             password: "TestPassword",
             password_confirmation: "TestPassword")

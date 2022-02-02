@@ -5,7 +5,7 @@ RSpec.describe Task, type: :model do
     it "checks if a task can be created" do
         user = User.create(first_name: "FirstName", 
             last_name: "LastName", 
-            email:"Email",
+            email: "Email",
             username: "Username",
             password: "Password",
             password_confirmation: "Password")

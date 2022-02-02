@@ -3,19 +3,19 @@ require 'json'
 
 RSpec.describe TasksController, type: :controller do
 
-    userObject = {
-            first_name: "TestFirstName", 
-                last_name: "TestLastName", 
-                email:"TestEmail",
-                username: "TestUsername",
-                password: "TestPassword",
-                password_confirmation: "TestPassword"
-            }
+    user_object = {
+        first_name: "TestFirstName", 
+        last_name: "TestLastName", 
+        email:"TestEmail",
+        username: "TestUsername",
+        password: "TestPassword",
+        password_confirmation: "TestPassword"
+    }
 
     describe "POST#create" do
 
         it "returns a success message" do
-            user = User.create(userObject)
+            user = User.create(user_object)
             allow_any_instance_of(TasksController).to receive(:current_user).and_return(user)
             post :create, params: { task: {description: "test1"}}
 
@@ -23,7 +23,7 @@ RSpec.describe TasksController, type: :controller do
         end
 
         it "returns an error if the task is not valid" do
-            user = User.create(userObject)
+            user = User.create(user_object)
             allow_any_instance_of(TasksController).to receive(:current_user).and_return(user)
             post :create, params: { task: {:description => nil}}
 
@@ -31,10 +31,10 @@ RSpec.describe TasksController, type: :controller do
         end
 
         it "returns an error message if the user is not logged in" do
-            user = User.create(userObject)
+            user = User.create(user_object)
             post :create, params: { task: {description: "test1"}}
+
             expect(response.body).to eq("You are not authorized to add this task.")
-            
         end
     end 
 
@@ -46,8 +46,8 @@ RSpec.describe TasksController, type: :controller do
             expect(response).to have_http_status(:success)
         end
 
-        it "retuns body with 1 tasks" do
-            user = User.create(userObject)
+        it "returns body with 1 tasks" do
+            user = User.create(user_object)
             allow_any_instance_of(TasksController).to receive(:current_user).and_return(user)
             task = user.tasks.create(description: "walk the dog")
             get :index
@@ -55,8 +55,19 @@ RSpec.describe TasksController, type: :controller do
             expect(JSON.parse(response.body).size).to eq(1)
         end
 
+        it "returns body with 2 tasks" do
+            user = User.create(user_object)
+            allow_any_instance_of(TasksController).to receive(:current_user).and_return(user)
+            task = user.tasks.create(description: "walk the dog")
+            task = user.tasks.create(description: "feed the cat")
+            get :index
+
+            expect(JSON.parse(response.body).size).to eq(2)
+        end
+
         it "returns an error message if the user is not logged in" do
             get :index
+
             expect(response.body).to eq("You are not authorized to see this list.")
         end
     end
@@ -64,7 +75,7 @@ RSpec.describe TasksController, type: :controller do
     describe "DELETE#destroy" do
         
         it "returns http success" do
-            user = User.create(userObject)
+            user = User.create(user_object)
             allow_any_instance_of(TasksController).to receive(:current_user).and_return(user)
             task = user.tasks.create(description: "walk the dog")
             delete :destroy, params: {id: task.id}
@@ -73,10 +84,11 @@ RSpec.describe TasksController, type: :controller do
         end
 
         it "returns a message that the task was deleted" do
-            user = User.create(userObject)
+            user = User.create(user_object)
             allow_any_instance_of(TasksController).to receive(:current_user).and_return(user)
             task = user.tasks.create(description: "walk the dog")
             delete :destroy, params: {id: task.id}
+
             expect(response.body).to eq("The task was successfully deleted.")
         end
 
@@ -87,7 +99,7 @@ RSpec.describe TasksController, type: :controller do
         end
 
         it "will delete a task" do
-            user = User.create(userObject)
+            user = User.create(user_object)
             allow_any_instance_of(TasksController).to receive(:current_user).and_return(user)
             task = user.tasks.create(description: "walk the dog")
 
@@ -97,7 +109,7 @@ RSpec.describe TasksController, type: :controller do
         end
 
         it "returns an error message if the user is not logged in" do
-            user = User.create(userObject)
+            user = User.create(user_object)
             task = user.tasks.create(description: "walk the dog")
             delete :destroy, params: {id: task.id}
 
@@ -108,7 +120,7 @@ RSpec.describe TasksController, type: :controller do
     describe "PATCH#update" do
 
         it "returns http success" do
-            user = User.create(userObject)
+            user = User.create(user_object)
             allow_any_instance_of(TasksController).to receive(:current_user).and_return(user)
             task = user.tasks.create(description: "walk the dog")
             patch :update, params: {id: task.id}
@@ -117,7 +129,7 @@ RSpec.describe TasksController, type: :controller do
         end
 
         it "returns a message that the task succesfuly updated" do
-            user = User.create(userObject)
+            user = User.create(user_object)
             allow_any_instance_of(TasksController).to receive(:current_user).and_return(user)
             task = user.tasks.create(description: "walk the dog")
             patch :update, params: {id: task.id}
@@ -132,7 +144,7 @@ RSpec.describe TasksController, type: :controller do
         end
 
         it "returns an error message if the user is not logged in" do
-            user = User.create(userObject)
+            user = User.create(user_object)
             task = user.tasks.create(description: "walk the dog")
             patch :update, params: {id: task.id}
 

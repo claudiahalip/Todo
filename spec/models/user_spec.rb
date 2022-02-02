@@ -1,11 +1,11 @@
 require 'rails_helper'
 
 RSpec.describe User, type: :model do
-
     it "checks if a task can be created" do
-        user = User.create(first_name: "FirstName", 
+        user = User.create(
+            first_name: "FirstName", 
             last_name: "LastName", 
-            email:"Email",
+            email: "Email",
             username: "Username",
             password: "Password",
             password_confirmation: "Password")
@@ -20,9 +20,10 @@ RSpec.describe User, type: :model do
     end
 
     it "will have a first_name attribute" do
-        user = User.create(first_name: "TestFirstName", 
+        user = User.create(
+            first_name: "TestFirstName", 
             last_name: "TestLastName", 
-            email:"TestEmail",
+            email: "TestEmail",
             username: "TestUsername",
             password: "TestPassword",
             password_confirmation: "TestPassword")
@@ -31,9 +32,10 @@ RSpec.describe User, type: :model do
     end
 
     it "will have a last_name attribute" do
-        user = User.create(first_name: "TestFirstName", 
+        user = User.create(
+            first_name: "TestFirstName", 
             last_name: "TestLastName", 
-            email:"TestEmail",
+            email: "TestEmail",
             username: "TestUsername",
             password: "TestPassword",
             password_confirmation: "TestPassword")
@@ -42,9 +44,10 @@ RSpec.describe User, type: :model do
     end
 
     it "will have an email attribute" do
-        user = User.create(first_name: "TestFirstName", 
+        user = User.create(
+            first_name: "TestFirstName", 
             last_name: "TestLastName", 
-            email:"TestEmail",
+            email: "TestEmail",
             username: "TestUsername",
             password: "TestPassword",
             password_confirmation: "TestPassword")
@@ -53,9 +56,10 @@ RSpec.describe User, type: :model do
     end
 
     it "will have a username attribute" do
-        user = User.create(first_name: "TestFirstName", 
+        user = User.create(
+            first_name: "TestFirstName", 
             last_name: "TestLastName", 
-            email:"TestEmail",
+            email: "TestEmail",
             username: "TestUsername",
             password: "TestPassword",
             password_confirmation: "TestPassword")
