@@ -3,7 +3,13 @@ require 'rails_helper'
 RSpec.describe Task, type: :model do
 
     it "checks if a task can be created" do
-        task = Task.create(description: "walk the dog")
+        user = User.create(first_name: "FirstName", 
+            last_name: "LastName", 
+            email: "Email",
+            username: "Username",
+            password: "Password",
+            password_confirmation: "Password")
+        task = Task.create(description: "walk the dog", user_id: user.id)
 
         expect(task).to be_valid
     end
