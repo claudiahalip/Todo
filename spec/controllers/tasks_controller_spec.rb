@@ -6,7 +6,7 @@ RSpec.describe TasksController, type: :controller do
     user_object = {
         first_name: "TestFirstName", 
         last_name: "TestLastName", 
-        email:"TestEmail",
+        email: "TestEmail",
         username: "TestUsername",
         password: "TestPassword",
         password_confirmation: "TestPassword"
